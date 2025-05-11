@@ -1,34 +1,47 @@
-import React from 'react';
-import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import colors from './colors';
 
-const AdminLoginPage = () => {
+const AdminLoginPage = ({ navigation }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = () => {
+    // TODO: add authentication logic here
+    navigation.navigate('AdminHome');
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.time}>9:34</Text>
-      <Image source={require('./icons/network.png')} style={styles.networkIcon} />
-      <Image source={require('./icons/wifi.png')} style={styles.wifiIcon} />
-      <Image source={require('./icons/battery.png')} style={styles.batteryIcon} />
-
       <Text style={styles.heading}>Hi Admin</Text>
-
-      <Image source={require('./assets/adminIcon.png')} style={styles.mainIcon} />
-
-      <Text style={styles.prompt}>Please enter your details :</Text>
+      <Text style={styles.prompt}>Please enter your details:</Text>
 
       <View style={styles.inputWrapper}>
-        <TextInput style={styles.input} placeholder="USERNAME" placeholderTextColor={colors.placeholder} />
+        <TextInput
+          style={styles.input}
+          placeholder="USERNAME"
+          placeholderTextColor={colors.gray}
+          value={username}
+          onChangeText={setUsername}
+        />
       </View>
 
-      <View style={[styles.inputWrapper, { marginTop: 8 }]}>
-        <TextInput style={styles.input} placeholder="PASSWORD" placeholderTextColor={colors.placeholder} secureTextEntry />
+      <View style={[styles.inputWrapper, { marginTop: 8 }]}>  
+        <TextInput
+          style={styles.input}
+          placeholder="PASSWORD"
+          placeholderTextColor={colors.gray}
+          secureTextEntry
+          value={password}
+          onChangeText={setPassword}
+        />
       </View>
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.goBack()}>
           <Text style={styles.buttonText}>BACK</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>LOGIN</Text>
         </TouchableOpacity>
       </View>
@@ -36,107 +49,54 @@ const AdminLoginPage = () => {
   );
 };
 
-export default AdminLoginPage;
-
 const styles = StyleSheet.create({
   container: {
-    width: 404,
-    height: 917,
-    borderRadius: 30,
-    backgroundColor: colors.background,
-    borderWidth: 1,
-    borderColor: colors.border,
-    padding: 15,
-  },
-  time: {
-    fontSize: 24,
-    position: 'absolute',
-    top: 24,
-    left: 15,
-    color: colors.text,
-  },
-  networkIcon: {
-    width: 22.55,
-    height: 21,
-    position: 'absolute',
-    top: 24,
-    left: 262.8,
-  },
-  wifiIcon: {
-    width: 24.51,
-    height: 22,
-    position: 'absolute',
-    top: 24,
-    left: 301.04,
-  },
-  batteryIcon: {
-    width: 24.51,
-    height: 12.5,
-    position: 'absolute',
-    top: 29,
-    left: 343.2,
+    flex: 1,
+    backgroundColor: colors.white,
+    padding: 20,
+    justifyContent: 'center',
   },
   heading: {
-    position: 'absolute',
-    top: 129,
-    left: 21,
-    fontSize: 24,
-    fontFamily: 'Poppins',
-    color: colors.text,
-    textAlign: 'left',
-  },
-  mainIcon: {
-    width: 194,
-    height: 182,
-    position: 'absolute',
-    top: 173,
-    left: 95,
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: colors.black,
+    marginBottom: 10,
   },
   prompt: {
-    position: 'absolute',
-    top: 381,
-    left: 11,
-    width: 306,
-    height: 36,
-    fontSize: 24,
-    fontFamily: 'Poppins',
-    color: colors.text,
+    fontSize: 16,
+    color: colors.black,
+    marginBottom: 20,
   },
   inputWrapper: {
-    borderWidth: 1,
-    borderColor: colors.inputBorder,
-    borderRadius: 20,
-    backgroundColor: colors.inputFill,
-    paddingHorizontal: 10,
-    height: 42,
+    width: '100%',
+    backgroundColor: colors.lightRed,
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    height: 50,
     justifyContent: 'center',
-    marginTop: 10,
-    marginLeft: 30,
-    marginRight: 30,
   },
   input: {
-    fontSize: 14,
-    color: colors.placeholder,
+    fontSize: 16,
+    color: colors.black,
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    position: 'absolute',
-    bottom: 10,
-    width: '100%',
-    paddingHorizontal: 24,
+    marginTop: 30,
   },
   button: {
-    width: 129,
-    height: 36,
-    backgroundColor: colors.buttonBackground,
-    borderRadius: 20,
-    justifyContent: 'center',
+    flex: 1,
+    backgroundColor: colors.red,
+    paddingVertical: 12,
+    borderRadius: 8,
     alignItems: 'center',
+    marginHorizontal: 5,
   },
   buttonText: {
-    fontFamily: 'Poppins',
-    fontSize: 24,
-    color: colors.buttonText,
+    color: colors.white,
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
+
+export default AdminLoginPage;
