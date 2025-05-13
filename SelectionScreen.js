@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
-import colors from './colors';
+import colors from './Colors';
 
 const SelectionScreen = ({ navigation }) => {
   const handleSelection = (role) => {

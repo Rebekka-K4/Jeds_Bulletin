@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import colors from './colors';
+import colors from './Colors';
 
 const UserLoginPage = ({ navigation }) => {
   const [username, setUsername] = useState('');
