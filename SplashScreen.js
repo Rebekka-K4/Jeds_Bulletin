@@ -1,6 +1,6 @@
  import React from 'react';
  import { View, Text, StyleSheet , Image } from 'react-native';
- import colors from './Colors'; 
+ import colors from './Colors'
  
  export default function SplashScreen(){
    return (
