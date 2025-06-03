@@ -10,3 +10,11 @@ import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 
 const { width } = Dimensions.get('window');
+export default function AdminIconScreen() {
+  const navigation = useNavigation();
+  const [fontsLoaded] = useFonts({
+    Poppins_400Regular,
+    Poppins_700Bold,
+  });
+  const [user, setUser] = useState(null);
+  const [profileImage, setProfileImage] = useState(null);
