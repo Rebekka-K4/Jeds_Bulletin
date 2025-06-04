@@ -58,3 +58,29 @@ export default function AdminIconScreen() {
       setProfileImage(result.assets[0].uri);
     }
   };
+    if (!fontsLoaded) {
+    return <View style={styles.container} />;
+  }
+
+  return (
+    <SafeAreaView style={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <Text style={styles.headerText}>My Profile</Text>
+        <Ionicons name="information-circle-outline" size={24} color="black" />
+      </View>
+
+      {/* Large Profile Image */}
+      <TouchableOpacity onPress={pickImage}>
+        {profileImage ? (
+          <Image source={{ uri: profileImage }} style={styles.largeProfileImage} />
+        ) : (
+          <View style={styles.placeholderContainer}>
+            <Image
+              source={{ uri: 'https://img.icons8.com/ios-filled/50/000000/add-image.png' }}
+              style={styles.placeholderImage}
+            />
+          </View>
+        )}
+      </TouchableOpacity>
+
