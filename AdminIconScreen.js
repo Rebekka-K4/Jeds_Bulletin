@@ -83,4 +83,40 @@ export default function AdminIconScreen() {
           </View>
         )}
       </TouchableOpacity>
+      {/* Profile Info */}
+      <View style={styles.profileCard}>
+        <Text style={styles.name}>{user?.displayName || 'Admin User'}</Text>
+        <Text style={styles.username}>Username: {user?.email || 'N/A'}</Text>
+      </View>
+
+      {/* Logout Button */}
+      <TouchableOpacity style={styles.signOutButton} onPress={handleLogout}>
+        <Text style={styles.signOutText}>SIGN OUT</Text>
+      </TouchableOpacity>
+
+      {/* Bottom Navigation */}
+      <View style={styles.bottomTab}>
+        <TouchableOpacity onPress={() => navigation.navigate('AdminHomeScreen')}>
+          <Ionicons name="home" size={30} color={colors.red} />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          {profileImage ? (
+            <Image source={{ uri: profileImage }} style={styles.bottomProfileIcon} />
+          ) : (
+            <Image
+              source={{ uri: 'https://img.icons8.com/ios-filled/50/000000/user-male-circle.png' }}
+              style={styles.bottomProfileIcon}
+            />
+          )}
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('AdminCalendar')}>
+          <Ionicons name="calendar" size={30} color={colors.red} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('AdminAnnouncements')}>
+          <Ionicons name="search" size={30} color={colors.red} />
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
+  );
+}
 
