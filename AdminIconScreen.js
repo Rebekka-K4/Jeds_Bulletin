@@ -119,4 +119,97 @@ export default function AdminIconScreen() {
     </SafeAreaView>
   );
 }
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: '#fff' },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    paddingTop: 50,
+    paddingBottom: 10,
+    backgroundColor: '#fff',
+  },
+  headerText: {
+    fontSize: 24,
+    fontFamily: 'Poppins_700Bold',
+  },
+  largeProfileImage: {
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    alignSelf: 'center',
+    borderWidth: 4,
+    borderColor: '#333',
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  placeholderContainer: {
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    backgroundColor: colors.lightRed,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    borderWidth: 4,
+    borderColor: '#333',
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  placeholderImage: {
+    width: 60,
+    height: 60,
+    tintColor: colors.red,
+  },
+  profileCard: {
+    backgroundColor: '#f0f0f0',
+    marginHorizontal: 20,
+    borderRadius: 20,
+    alignItems: 'center',
+    padding: 20,
+  },
+  name: {
+    fontSize: 22,
+    fontFamily: 'Poppins_700Bold',
+  },
+  username: {
+    fontSize: 14,
+    fontFamily: 'Poppins_400Regular',
+    color: '#555',
+    marginTop: 5,
+  },
+  signOutButton: {
+    backgroundColor: colors.red,
+    borderRadius: 30,
+    marginTop: 30,
+    alignSelf: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 50,
+  },
+  signOutText: {
+    color: colors.yellow,
+    fontFamily: 'Poppins_700Bold',
+    fontSize: 16,
+  },
+  bottomTab: {
+    position: 'absolute',
+    bottom: 0,
+    height: 70,
+    width: '100%',
+    backgroundColor: '#eee',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  bottomProfileIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: '#888',
+  },
+});
+
 
