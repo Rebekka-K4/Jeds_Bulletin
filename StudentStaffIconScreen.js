@@ -79,4 +79,56 @@ export default function StudentStaffIconScreen() {
       setProfileImage(result.assets[0].uri);
     }
   };
+    if (!fontsLoaded) {
+    return <View style={styles.container} />;
+  }
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>My Profile</Text>
+      </View>
+      <View style={styles.profileContainer}>
+        <TouchableOpacity style={styles.profileImageContainer} onPress={pickImage}>
+          {profileImage ? (
+            <Image source={{ uri: profileImage }} style={styles.profileImage} />
+          ) : (
+            <View style={styles.placeholderContainer}>
+              <Image
+                source={{ uri: 'https://img.icons8.com/ios-filled/50/000000/add-image.png' }}
+                style={styles.placeholderImage}
+              />
+            </View>
+          )}
+          <Text style={styles.addPhotoText}>Add Profile Photo</Text>
+        </TouchableOpacity>
+        <Text style={styles.sectionTitle}>User Information</Text>
+        {user ? (
+          <>
+            <Text style={styles.profileText}>Email: {user.email}</Text>
+            <Text style={styles.profileText}>Role: {user.email.includes('admin') ? 'Admin' : 'Student/Staff'}</Text>
+          </>
+        ) : (
+          <Text style={styles.profileText}>No user data available</Text>
+        )}
+      </View>
+      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+        <Text style={styles.buttonText}>LOGOUT</Text>
+      </TouchableOpacity>
+      <View style={styles.bottomNav}>
+        <TouchableOpacity onPress={() => navigation.navigate('StudentStaffHomeScreen')}>
+          <Image source={{ uri: 'https://img.icons8.com/ios-filled/50/000000/home.png' }} style={styles.bottomIcon} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Search')}>
+          <Image source={{ uri: 'https://img.icons8.com/ios-filled/50/000000/search.png' }} style={styles.bottomIcon} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('StudentStaffCalendar')}>
+          <Image source={{ uri: 'https://img.icons8.com/ios-filled/50/000000/calendar.png' }} style={styles.bottomIcon} />
+        </TouchableOpacity>
+        <Image source={{ uri: 'https://img.icons8.com/ios-filled/50/000000/user-male-circle.png' }} style={styles.bottomIcon} />
+      </View>
+    </View>
+  );
+}
+
 
