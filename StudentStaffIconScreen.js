@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions, Alert } from 'react-native';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import * as ImagePicker from 'expo-image-picker';
 import colors from './Colors';
 import { auth } from './firebaseConfig';
@@ -16,11 +17,32 @@ export default function StudentStaffIconScreen() {
   });
   const [user, setUser] = useState(null);
   const [profileImage, setProfileImage] = useState(null);
+   const [role, setRole] = useState(null);
+  const [name, setName] = useState(null);
+  const db = getFirestore();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+   const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
+      
+        try {
+          const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
+          if (userDoc.exists()) {
+            const userData = userDoc.data();
+            setRole(userData.role === 'admin' ? 'Admin' : 'Student/Staff');
+            setName(userData.name || 'No Name Provided');
+          } else {
+            setRole('Unknown');
+            setName('Unknown');
+            Alert.alert('Error', 'User data not found. Please contact an admin.');
+          }
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+          setRole('Unknown');
+          setName('Unknown');
+          Alert.alert('Error', 'Failed to load user data.');
+        }
       } else {
         navigation.navigate('Selection');
       }
