@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, Alert } from 'react-native';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import colors from './Colors';
 import { auth } from './firebaseConfig';
 import { useFonts, Poppins_400Regular, Poppins_700Bold } from '@expo-google-fonts/poppins';
@@ -13,6 +14,7 @@ export default function StudentStaffScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const db = getFirestore();
 
   const handleLogin = async () => {
     const trimmedEmail = email.trim();
@@ -22,11 +24,20 @@ export default function StudentStaffScreen({ navigation }) {
     console.log('Navigation:', navigation);
 
     try {
-      console.log('Attempting Firebase login for:', trimmedEmail);
-      await signInWithEmailAndPassword(auth, trimmedEmail, trimmedPassword);
-      setError('');
-      console.log('Firebase login successful, navigating to StudentStaffHomeScreen');
-      navigation.navigate('StudentStaffHomeScreen');
+     console.log('Attempting Firebase login for:', trimmedEmail);
+      const userCredential = await signInWithEmailAndPassword(auth, trimmedEmail, trimmedPassword);
+      const user = userCredential.user;
+
+      const userDoc = await getDoc(doc(db, 'users', user.uid));
+      if (userDoc.exists() && ['admin', 'student_staff'].includes(userDoc.data().role)) {
+        setError('');
+        console.log('Firebase login successful, navigating to StudentStaffHomeScreen');
+        navigation.navigate('StudentStaffHomeScreen');
+      } else {
+        await auth.signOut(); 
+        setError('Access Denied: Invalid role for this page.');
+        Alert.alert('Access Denied', 'Invalid role for this page.');
+      }
     } catch (error) {
       console.error('Login error:', error.code, error.message);
       setError('Invalid email or password');
