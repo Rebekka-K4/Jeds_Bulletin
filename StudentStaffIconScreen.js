@@ -130,5 +130,106 @@ export default function StudentStaffIconScreen() {
     </View>
   );
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    padding: 20,
+  },
+  header: {
+    backgroundColor: colors.white,
+    width: '100%',
+    padding: 20,
+    alignItems: 'left',
+    marginBottom: 10,
+  },
+  headerText: {
+    fontSize: 30,
+    fontFamily: 'Poppins_700Bold',
+    color: colors.black,
+  },
+  profileContainer: {
+    flex: 1,
+    width: '100%',
+    alignItems: 'center',
+  },
+  profileImageContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  profileImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    borderWidth: 2,
+    borderColor: colors.black,
+  },
+  placeholderContainer: {
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    backgroundColor: colors.gray,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: colors.black,
+  },
+  placeholderImage: {
+    width: 60,
+    height: 60,
+    tintColor: colors.red,
+  },
+  addPhotoText: {
+    fontSize: 16,
+    fontFamily: 'Poppins_400Regular',
+    color: colors.red,
+    marginTop: 10,
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontFamily: 'Poppins_700Bold',
+    color: colors.red,
+    marginBottom: 20,
+    paddingTop: 10,
+  },
+  profileText: {
+    fontSize: 18,
+    fontFamily: 'Poppins_400Regular',
+    color: colors.black,
+    marginVertical: 10,
+  },
+  logoutButton: {
+    width: width * 0.5,
+    height: 44,
+    borderRadius: 20,
+    backgroundColor: colors.red,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 10,
+  },
+  buttonText: {
+    fontSize: 24,
+    fontFamily: 'Poppins_700Bold',
+    color: colors.yellow,
+  },
+  bottomNav: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 10,
+    backgroundColor: '#f0f0f0',
+    borderRadius: 10,
+    position: 'absolute',
+    bottom: 20,
+    width: '90%',
+    alignSelf: 'center',
+  },
+  bottomIcon: {
+    width: 30,
+    height: 30,
+    tintColor: colors.red,
+  },
+});
 
 
