@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, Alert } from 'react-native';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+mport { getFirestore, doc, getDoc } from 'firebase/firestore';
 import colors from './Colors';
 import { auth } from './firebaseConfig';
 import { useFonts, Poppins_400Regular, Poppins_700Bold } from '@expo-google-fonts/poppins';
@@ -13,14 +14,24 @@ export default function AdminScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+   const db = getFirestore();
 
   const handleLogin = async () => {
     const trimmedEmail = email.trim();
     const trimmedPassword = password.trim();
     try {
-      await signInWithEmailAndPassword(auth, trimmedEmail, trimmedPassword);
-      setError('');
-      navigation.navigate('AdminHomeScreen');
+      const userCredential = await signInWithEmailAndPassword(auth, trimmedEmail, trimmedPassword);
+      const user = userCredential.user;
+
+      const userDoc = await getDoc(doc(db, 'users', user.uid));
+      if (userDoc.exists() && userDoc.data().role === 'admin') {
+        setError('');
+        navigation.navigate('AdminHomeScreen');
+      } else {
+        await auth.signOut(); 
+        setError('Access Denied: Only admins can access this page.');
+        Alert.alert('Access Denied', 'Only users with admin role can access this page.');
+      }
     } catch (error) {
       console.error('Login error:', error.code, error.message);
       setError('Invalid email or password');
