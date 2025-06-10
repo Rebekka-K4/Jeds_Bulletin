@@ -93,6 +93,130 @@ export default function StudentStaffHomeScreen() {
         </View>
       </View>
     );
-  }}
+  }
 
- 
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Home</Text>
+      </View>
+      <FlatList
+        data={announcements}
+        renderItem={renderAnnouncement}
+        keyExtractor={(item) => item.id}
+        style={styles.announcementList}
+        contentContainerStyle={{ paddingBottom: 80 }}
+        ListHeaderComponent={<Text style={styles.sectionTitle}>Latest News</Text>}
+      />
+      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+        <Text style={styles.buttonText}>LOGOUT</Text>
+      </TouchableOpacity>
+      <View style={styles.bottomNav}>
+        <Image source={{ uri: 'https://img.icons8.com/ios-filled/50/000000/home.png' }} style={styles.bottomIcon} />
+        <TouchableOpacity onPress={() => navigation.navigate('Search')}>
+          <Image source={{ uri: 'https://img.icons8.com/ios-filled/50/000000/search.png' }} style={styles.bottomIcon} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('StudentStaffCalendar')}>
+          <Image source={{ uri: 'https://img.icons8.com/ios-filled/50/000000/calendar.png' }} style={styles.bottomIcon} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('StudentStaffIcon')}>
+          <Image source={{ uri: 'https://img.icons8.com/ios-filled/50/000000/user-male-circle.png' }} style={styles.bottomIcon} />
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    padding: 20,
+  },
+  header: {
+    backgroundColor: colors.red,
+    width: '100%',
+    padding: 20,
+    alignItems: 'left',
+    marginBottom: 10,
+  },
+  headerText: {
+    fontSize: 30,
+    fontFamily: 'Poppins_700Bold',
+    color: colors.black,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingText: {
+    fontSize: 18,
+    fontFamily: 'Poppins_400Regular',
+    color: colors.black,
+    marginTop: 10,
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontFamily: 'Poppins_700Bold',
+    color: colors.black,
+    marginBottom: 10,
+    paddingTop: 20,
+  },
+  announcementList: {
+    width: '100%',
+  },
+  announcementCard: {
+    backgroundColor: colors.red,
+    borderRadius: 10,
+    padding: 15,
+    marginVertical: 10,
+    width: width * 0.9,
+    alignSelf: 'center',
+    borderWidth: 1,
+    borderColor: colors.red,
+  },
+  announcementTitle: {
+    fontSize: 20,
+    fontFamily: 'Poppins_700Bold',
+    color: colors.black,
+  },
+  announcementContent: {
+    fontSize: 16,
+    fontFamily: 'Poppins_400Regular',
+    color: colors.yellow,
+    marginTop: 5,
+  },
+  logoutButton: {
+    width: width * 0.5,
+    height: 44,
+    borderRadius: 20,
+    backgroundColor: colors.red,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 100,
+  },
+  buttonText: {
+    fontSize: 24,
+    fontFamily: 'Poppins_700Bold',
+    color: colors.red,
+  },
+  bottomNav: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 10,
+    backgroundColor: '#f0f0f0',
+    borderRadius: 10,
+    position: 'absolute',
+    bottom: 20,
+    width: '90%',
+    alignSelf: 'center',
+  },
+  bottomIcon: {
+    width: 30,
+    height: 30,
+    tintColor: colors.red,
+  },
+});
